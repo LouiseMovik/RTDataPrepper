@@ -10,8 +10,9 @@ namespace RTDataPrepper
     /// <summary>
     /// TO DO: 
     /// 1. Enter path to the working directory.
-    /// 2. Specify requested actions (QC1, Cleanup, QC2).
+    /// 2. Specify requested actions (QC1, Cleanup and/or QC2).
     /// 3. Create lists (described below).
+    /// 4. Search for instances of "case-specific" throughout the entire solution and review the code that might require modifications. 
     /// </summary>
     internal class InData
     {
