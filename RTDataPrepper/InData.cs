@@ -34,9 +34,9 @@ namespace RTDataPrepper
             folderPath = @"";
 
             // Specify requested actions using true/false
-            performQC1 = false; 
+            performQC1 = true; 
             performCleanup = true; 
-            performQC2= false;
+            performQC2 = false;
 
             // listExtraction:
             // A textfile containing a list of what's been requested to export from the clinical ARIA database. 

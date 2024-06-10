@@ -25,7 +25,6 @@ namespace RTDataPrepper
         static private double doseTolerance;
         static private double distanceTolerance;
         static private double HUTolerance;
-        static private double voxelsTolerance;
 
         /// <summary>
         /// The purpose of QC2 is to:
@@ -374,7 +373,8 @@ namespace RTDataPrepper
         /// </summary>
         static private void CreateDataTable()
         {
-            resultsQC2.TableName = "resultsQC2";
+            resultsQC2 = new DataTable();
+            resultsQC2.TableName = "ResultsQC2";
 
             CreateColumn(resultsQC2, "Study ID", typeof(string));
             CreateColumn(resultsQC2, "Everything Correct", typeof(bool));

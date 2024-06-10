@@ -64,7 +64,7 @@ namespace RTDataPrepper
         static private DataTable CreateResultTable()
         {
             DataTable resultsQC1 = new DataTable();
-            resultsQC1.TableName = "resultsQC1";
+            resultsQC1.TableName = "ResultsQC1";
 
             CreateColumn(resultsQC1, "Study ID", typeof(string));
             CreateColumn(resultsQC1, "# Rows In Indata", typeof(int));
