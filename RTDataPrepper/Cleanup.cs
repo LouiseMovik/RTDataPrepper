@@ -60,6 +60,8 @@ namespace RTDataPrepper
                     EditPlanName(currentPlan);
                     EditStructureNames(); // Case-specific modifications!
                     RemoveSetupNotes(currentPlan);
+                    RemoveReferencedPlan(currentPlan);
+                    Unapprove(currentPlan);
 
                     currentPlan.Write(pathPlan);
                     currentDose.Write(pathDose);
@@ -184,8 +186,10 @@ namespace RTDataPrepper
                 foreach (string RSpath in RSpaths)
                 {
                     DICOMObject currentStructureSet = DICOMObject.Read(RSpath);
+                    Unapprove(currentStructureSet);
                     EditNameHeart(currentStructureSet);
                     EditNameEsophagus(currentStructureSet);
+                    EditNameLungs(currentStructureSet);
 
                     currentStructureSet.Write(RSpath);
                 }
@@ -223,11 +227,47 @@ namespace RTDataPrepper
         }
 
         /// <summary>
+        /// Edits the IDs of the lungs.
+        /// </summary>
+        static private void EditNameLungs(DICOMObject currentStructureSet)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+
+            }
+        }
+
+        /// <summary>
         /// Removes all setup notes to prevent the inclusion of sensitive information that is not handled in the export pseudonymization process.
         /// </summary>
         static private void RemoveSetupNotes(DICOMObject currentPlan)
         {
             currentPlan.Remove(TagHelper.SetupTechniqueDescription);
+        }
+
+        /// <summary>
+        /// Unapproves the DICOM file.
+        /// </summary>
+        static public void Unapprove(DICOMObject dicomObject)
+        {
+            var appStatus = new CodeString
+            {
+                DData = "UNAPPROVED",
+                Tag = TagHelper.ApprovalStatus
+            };
+            dicomObject.Replace(appStatus);
+        }
+
+        /// <summary>
+        /// Removes the DICOM tag ReferencedRTPlanSequence.
+        /// </summary>
+        static public void RemoveReferencedPlan(DICOMObject dicomObjects)
+        {
+            dicomObjects.Remove(TagHelper.ReferencedRTPlanSequence);
         }
     }
 }

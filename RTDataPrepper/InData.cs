@@ -31,7 +31,7 @@ namespace RTDataPrepper
         {
             // Enter path to working directory
             //folderPath = @"path_to_working_directory";
-            folderPath = @"G:\SU.Omr4.MFT.TSF\Pågående projekt\Amaryllis\Amaryllis III\Export och Import\Utvärdering\Test av slutgiltigt flöde\Städade nytt script";
+            folderPath = @"";
 
             // Specify requested actions using true/false
             performQC1 = false; 
@@ -42,23 +42,20 @@ namespace RTDataPrepper
             // A textfile containing a list of what's been requested to export from the clinical ARIA database. 
             // The structure should be Patient ID    Study ID   Course ID    PlanSetupID (tabs delimited).
             // One patient can have several lines in the list since one line per treatment plan is used.
-            //locationOfExtractionList = folderPath + @"\listExtraction.txt";
-            locationOfExtractionList = @"G:\SU.Omr4.MFT.TSF\Pågående projekt\Amaryllis\Amaryllis III\Export och Import\Utvärdering\Test av slutgiltigt flöde\NewListForAriaDataExtractor.txt";
+            locationOfExtractionList = folderPath + @"\listExtraction.txt";
 
             // listCleanup:
             // A textfile containing a list of what's been requested to clean as well as information used to perform cleanup.
             // The structure should be Study ID   Course ID    PlanSetupID  Number of fractions delivered with treatment plan   Date of first fraction delivered with treatment plan (tabs delimited).
             // One patient can have several lines in the list since one line per treatment plan is used.
-            //locationOfCleanupList = folderPath + @"\listCleanup.txt";
-            locationOfCleanupList = @"G:\SU.Omr4.MFT.TSF\Pågående projekt\Amaryllis\Amaryllis III\Export och Import\Utvärdering\Test av slutgiltigt flöde\NewListForScript.txt";
+            locationOfCleanupList = folderPath + @"\listCleanup.txt";
 
             // listQC2:
             // A textfile containing a list of information to a selected reference structure (we used the left lung).
             // The structure should be Study ID   Corrected dose to reference structure over treatment course  Center point (x)     Center point (y)    Center point (z)    CT number in center point   (tabs delimited).
             // Corrected dose to reference structure over treatment course can be any dose considered suitable. We used the delivered mean dose to the reference structure which was calculated by summarizing the planned mean dose to the reference structure per fraction in each treatment plan multiplied with the number of delivered fractions of that treatment plan. 
             // In this list there should only be one line per patient.
-            //locationOfQC2List = folderPath + @"\listQC2.txt";
-            locationOfQC2List = @"G:\SU.Omr4.MFT.TSF\Pågående projekt\Amaryllis\Amaryllis III\Export och Import\Utvärdering\Test av slutgiltigt flöde\Städade nytt script\NewListForQA.txt";
+            locationOfQC2List = folderPath + @"\listQC2.txt";
         }
         
         /// <summary>

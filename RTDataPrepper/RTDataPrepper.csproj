@@ -52,6 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icojam-Blue-Bits-Document-settings.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EvilDICOM, Version=2.0.6.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EvilDICOM.2.0.6.5\lib\net472\EvilDICOM.dll</HintPath>
@@ -136,6 +139,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icojam-Blue-Bits-Document-settings.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
