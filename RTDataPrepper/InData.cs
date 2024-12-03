@@ -23,6 +23,7 @@ namespace RTDataPrepper
         public bool performQC1;
         public bool performCleanup;
         public bool performQC2;
+        public bool performCollection;
 
         /// <summary>
         /// Default constructor of InData.
@@ -30,13 +31,14 @@ namespace RTDataPrepper
         public InData()
         {
             // Enter path to working directory
-            //folderPath = @"path_to_working_directory";
+            // folderPath = @"path_to_working_directory";
             folderPath = @"";
 
             // Specify requested actions using true/false
             performQC1 = true; 
-            performCleanup = true; 
+            performCleanup = false; 
             performQC2 = false;
+            performCollection = false;
 
             // listExtraction:
             // A textfile containing a list of what's been requested to export from the clinical ARIA database. 

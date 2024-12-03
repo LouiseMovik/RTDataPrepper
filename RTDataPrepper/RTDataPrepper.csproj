@@ -128,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection.cs" />
     <Compile Include="QC2.cs" />
     <Compile Include="StudyRTPlan.cs" />
     <Compile Include="Cleanup.cs" />
