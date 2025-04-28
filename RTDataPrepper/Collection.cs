@@ -53,10 +53,10 @@ namespace RTDataPrepper
                 patient = app.OpenPatientById(ID);
 
                 // Calculate the mean dose to an OAR
-                double meanDose = MeanDose("Heart");
+                double meanDose = MeanDose("Heart_AI");
 
                 // Calculate volume at dose (V_XGy) from a generated PlanSum
-                double volumeAtDose = VolumeAtDose(20, "Heart");
+                double volumeAtDose = VolumeAtDose(20, "Heart_AI");
 
                 // Crate one row in the DataTable for the considered patient. The 
                 DataRow row = resultsCollection.NewRow();

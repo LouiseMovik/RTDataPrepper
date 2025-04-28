@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Schema;
 using VMS.TPS.Common.Model.API;
 using VMS.TPS.Common.Model.Types;
 
@@ -63,8 +65,8 @@ namespace RTDataPrepper
             folderPath = inData.folderPath;
             listExtraction = inData.ReadExtractionList();
             listQC2 = inData.ReadQC2List();
-            listIDs = listExtraction.Select(r => r.Split('\t').Skip(1).First()).Distinct().ToArray();
-
+            listIDs = listExtraction.Select(r => r.Split('\t').Skip(1).First()).Distinct().ToArray(); 
+            
             CreateDataTable();
         }
 
@@ -102,7 +104,7 @@ namespace RTDataPrepper
                     patientRow["Plans Have Dose"] = PlansHaveDose();
 
                     // Controls of reference structure
-                    SelectReferenceStructure(); // Case-specific method!
+                    SelectReferenceStructure(); // Case-specific method
                     ControlDose(studyID, patientRow);
                     ControlCenterPointLocation(studyID, referenceStructure, patientRow);
                     ControlHUinCenterPoint(studyID, referenceStructure, patientRow);
@@ -235,10 +237,11 @@ namespace RTDataPrepper
         }
 
         /// <summary>
-        /// Calculates the accumulated mean lung dose in the treatment course to the reference structure.
+        /// Calculates the accumulated mean lung dose in the treatment course to the reference structure. Case-specific method.
         /// </summary>
         static private double DoseInEclipse()
         {
+            // Calculation of dose to the reference structure
             double dose = 0;
             foreach (ExternalPlanSetup plan in patient.Courses.First().ExternalPlanSetups)
             {
@@ -251,6 +254,37 @@ namespace RTDataPrepper
                 }
             }
             return Math.Round(dose, 2);
+
+            // Calculation of dose to the all lung structures
+            //double dose = 0; 
+            //foreach (ExternalPlanSetup plan in patient.Courses.First().ExternalPlanSetups)
+            //{
+            //    int numberOfLungStructures = plan.StructureSet.Structures.Where(r => r.Id.Equals("Lung_R") || r.Id.Equals("Lung_L") || r.Id.Equals("LungTotal")).Count();
+            //    if (numberOfLungStructures == 1)
+            //    {
+            //        try
+            //        {
+            //            dose += plan.GetDVHCumulativeData(plan.StructureSet.Structures.First(r => r.Id.Equals("LungTotal")), DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MeanDose.Dose;
+            //        }
+            //        catch
+            //        {
+            //            try
+            //            {
+            //                dose += plan.GetDVHCumulativeData(plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_R")), DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MeanDose.Dose;
+            //            }
+            //            catch
+            //            {
+            //                dose += plan.GetDVHCumulativeData(plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_L")), DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MeanDose.Dose;
+            //            }
+            //        }
+            //    }
+            //    else if (numberOfLungStructures == 2)
+            //    {
+            //        dose += plan.GetDVHCumulativeData(plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_R")), DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MeanDose.Dose * plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_R")).Volume / (plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_R")).Volume + plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_L")).Volume);
+            //        dose += plan.GetDVHCumulativeData(plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_L")), DoseValuePresentation.Absolute, VolumePresentation.AbsoluteCm3, 0.1).MeanDose.Dose * plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_L")).Volume / (plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_R")).Volume + plan.StructureSet.Structures.First(r => r.Id.Equals("Lung_L")).Volume);
+            //    }
+            //}
+            //return Math.Round(dose, 2);
         }
 
         /// <summary>
@@ -321,9 +355,11 @@ namespace RTDataPrepper
 
             //Fill buffer with voxels from current slice
             image.GetVoxels((int)dz, buffer);
-            for (int x = 0; x < image.XSize; x++)
+            int xmax = image.XSize;
+            int ymax = image.YSize;
+            for (int x = 0; x < xmax; x++)
             {
-                for (int y = 0; y < image.YSize; y++)
+                for (int y = 0; y < ymax; y++)
                 {
                     //Set HU from "voxel value" - have to convert
                     hu[x, y] = image.VoxelToDisplayValue(buffer[x, y]);
@@ -347,9 +383,11 @@ namespace RTDataPrepper
             {
                 //Fill buffer with voxels from current slice
                 image.GetVoxels(z, buffer);
-                for (int x = 0; x < image.XSize; x++)
+                int xmax = image.XSize;
+                int ymax = image.YSize;
+                for (int x = 0; x < xmax; x++)
                 {
-                    for (int y = 0; y < image.YSize; y++)
+                    for (int y = 0; y < ymax; y++)
                     {
                         //Set HU from "voxel value" - have to convert
                         hu[x, y] = image.VoxelToDisplayValue(buffer[x, y]);

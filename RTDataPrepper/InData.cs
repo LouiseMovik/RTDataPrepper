@@ -35,7 +35,7 @@ namespace RTDataPrepper
             folderPath = @"";
 
             // Specify requested actions using true/false
-            performQC1 = true; 
+            performQC1 = false; 
             performCleanup = false; 
             performQC2 = false;
             performCollection = false;
@@ -48,7 +48,7 @@ namespace RTDataPrepper
 
             // listCleanup:
             // A textfile containing a list of what's been requested to clean as well as information used to perform cleanup.
-            // The structure should be Study ID   Course ID    PlanSetupID  Number of fractions delivered with treatment plan   Date of first fraction delivered with treatment plan (tabs delimited).
+            // The structure should be Study ID   PlanSetupID  Number of fractions delivered with treatment plan   Date of first fraction delivered with treatment plan (tabs delimited).
             // One patient can have several lines in the list since one line per treatment plan is used.
             locationOfCleanupList = folderPath + @"\listCleanup.txt";
 
