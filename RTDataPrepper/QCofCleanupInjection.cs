@@ -14,7 +14,7 @@ using VMS.TPS.Common.Model.Types;
 
 namespace RTDataPrepper
 {
-    internal class QC2
+    internal class QCofCleanupInjection
     {
         static private Application app;
         static private DataTable resultsQC2;
@@ -29,7 +29,7 @@ namespace RTDataPrepper
         static private double HUTolerance;
 
         /// <summary>
-        /// The purpose of QC2 is to:
+        /// The purpose of QCofCleanupInjection is to:
         /// 1. Control that all patients have been created in the research ARIA database.
         /// 2. Control that the number of created treatment plans is correct for each patient.
         /// 3. Control correctness of treatment plan IDs.

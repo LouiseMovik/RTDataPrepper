@@ -10,7 +10,7 @@ namespace RTDataPrepper
     /// <summary>
     /// TO DO: 
     /// 1. Enter path to the working directory.
-    /// 2. Specify requested actions (QC1, Cleanup and/or QC2).
+    /// 2. Specify requested actions (QCofExtraction, Cleanup and/or QCofCleanupInjection).
     /// 3. Create lists (described below).
     /// 4. Search for instances of "case-specific" throughout the entire solution and review the code that might require modifications. 
     /// </summary>
@@ -20,9 +20,9 @@ namespace RTDataPrepper
         private string locationOfExtractionList;
         private string locationOfCleanupList;
         private string locationOfQC2List;
-        public bool performQC1;
+        public bool performQCofExtraction;
         public bool performCleanup;
-        public bool performQC2;
+        public bool performQCofCleanupInjection;
         public bool performCollection;
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace RTDataPrepper
             folderPath = @"";
 
             // Specify requested actions using true/false
-            performQC1 = false; 
+            performQCofExtraction = false; 
             performCleanup = false; 
-            performQC2 = false;
+            performQCofCleanupInjection = false;
             performCollection = false;
 
             // listExtraction:
@@ -79,7 +79,7 @@ namespace RTDataPrepper
         }
 
         /// <summary>
-        /// Reads the list used for QC2. 
+        /// Reads the list used for QCofCleanupInjection. 
         /// </summary>
         public string[] ReadQC2List()
         {

@@ -18,9 +18,9 @@ namespace RTDataPrepper
             try
             {
                 InData inData = new InData();
-                if (inData.performQC1) QC1.RunQC1();
+                if (inData.performQCofExtraction) QCofExtraction.RunQC1();
                 if (inData.performCleanup) Cleanup.RunCleanup();
-                if (inData.performQC2) QC2.RunQC2();
+                if (inData.performQCofCleanupInjection) QCofCleanupInjection.RunQC2();
                 if (inData.performCollection) Collection.RunCollection();
             }
             catch (Exception e)

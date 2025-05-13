@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace RTDataPrepper
 {
-    internal class QC1
+    internal class QCofExtraction
     {
         static private string[] listExtraction;
         static private string[] listIDs;
@@ -17,7 +17,7 @@ namespace RTDataPrepper
         static private DataTable resultsQC1;
 
         /// <summary>
-        /// The purpose of QC1 is to control that the number of DICOM files written corresponds to what was requested to export. 
+        /// The purpose of QCofExtraction is to control that the number of DICOM files written corresponds to what was requested to export. 
         /// </summary>
         static public void RunQC1()
         {

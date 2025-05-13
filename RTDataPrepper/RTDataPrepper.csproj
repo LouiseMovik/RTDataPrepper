@@ -129,13 +129,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collection.cs" />
-    <Compile Include="QC2.cs" />
+    <Compile Include="QCofCleanupInjection.cs" />
     <Compile Include="StudyRTPlan.cs" />
     <Compile Include="Cleanup.cs" />
     <Compile Include="InData.cs" />
     <Compile Include="PrepManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QC1.cs" />
+    <Compile Include="QCofExtraction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
